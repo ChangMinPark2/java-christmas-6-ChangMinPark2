@@ -42,7 +42,7 @@ public class OrderDetailsGenerator {
     }
 
     private boolean isGiftMenu(int beforeDiscountAmount) {
-        if (beforeDiscountAmount >= DiscountCalCulator.BENEFITCONDITION) {
+        if (beforeDiscountAmount >= DiscountType.GIFT_EVENT_CONDITION) {
             return true;
         }
 
@@ -51,7 +51,7 @@ public class OrderDetailsGenerator {
 
     private HashMap<String, Integer> calculateBenefits(Order order, int beforeDistCountAmount) {
         DiscountCalCulator discountCalCulator = new DiscountCalCulator();
-        HashMap<String, Integer> benefitList = discountCalCulator.totalDiscount(order.getVisitDay(), beforeDistCountAmount, order);
+        HashMap<String, Integer> benefitList = discountCalCulator.calculateTotalDiscount(order.getVisitDay(), beforeDistCountAmount, order);
 
         return benefitList;
     }
