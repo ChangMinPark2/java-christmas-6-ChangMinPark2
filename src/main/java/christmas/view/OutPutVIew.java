@@ -78,6 +78,6 @@ public class OutPutVIew {
 
     public void printDecemberEventBadge(OrderDetails orderDetails) {
         System.out.println("<12월 이벤트 배지>");
-        System.out.println(orderDetails.getDecemberEventBadge());
+        System.out.println(orderDetails.getDecemberEventBadge().getBadgeName());
     }
 }

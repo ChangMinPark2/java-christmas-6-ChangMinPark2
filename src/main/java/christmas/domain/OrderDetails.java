@@ -9,7 +9,7 @@ public class OrderDetails {
     private HashMap<String, Integer> benefitsReceived;
     private int totalBenefitValue;
     private int estimatedPaymentAfterDiscount;
-    private String decemberEventBadge;
+    private DecemberEventBadge decemberEventBadge;
 
     public OrderDetails(HashMap<Menu, Integer> orderedMenus,
                         int totalOrderAmountBeforeDiscount,
@@ -17,7 +17,7 @@ public class OrderDetails {
                         HashMap<String, Integer> benefitsReceived,
                         int totalBenefitValue,
                         int estimatedPaymentAfterDiscount,
-                        String decemberEventBadge) {
+                        DecemberEventBadge decemberEventBadge) {
 
         this.orderedMenus = orderedMenus;
         this.totalOrderAmountBeforeDiscount = totalOrderAmountBeforeDiscount;
@@ -52,7 +52,7 @@ public class OrderDetails {
         return estimatedPaymentAfterDiscount;
     }
 
-    public String getDecemberEventBadge() {
+    public DecemberEventBadge getDecemberEventBadge() {
         return decemberEventBadge;
     }
 }

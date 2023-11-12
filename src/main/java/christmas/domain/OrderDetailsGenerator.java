@@ -13,7 +13,7 @@ public class OrderDetailsGenerator {
         HashMap<String, Integer> benefitList = calculateBenefits(order, calculateTotalBeforeDiscount(orderMenus));
         int totalBenefitAmount = calculateTotalBenefitAmount(benefitList);
         int afterAbleAmount = calculateFinalPayment(beforeDistCountAmount, totalBenefitAmount, giftMenu);
-        String event = determineEventBadge(totalBenefitAmount);
+        DecemberEventBadge event = determineEventBadge(totalBenefitAmount);
         OrderDetails orderDetails = new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu, benefitList, totalBenefitAmount, afterAbleAmount, event);
 
         return orderDetails;
@@ -74,17 +74,17 @@ public class OrderDetailsGenerator {
         return beforeDistCountAmount - totalBenefitAmount;
     }
 
-    private String determineEventBadge(int totalBenefitAmount) {
+    private DecemberEventBadge determineEventBadge(int totalBenefitAmount) {
         if (totalBenefitAmount >= 5000 && totalBenefitAmount < 10000) {
-            return DecemberEventBadge.STAR.name();
+            return DecemberEventBadge.STAR;
         }
         if (totalBenefitAmount >= 10000 && totalBenefitAmount < 20000) {
-            return DecemberEventBadge.TREE.name();
+            return DecemberEventBadge.TREE;
         }
         if (totalBenefitAmount >= 20000) {
-            return DecemberEventBadge.SANTA.name();
+            return DecemberEventBadge.SANTA;
         }
 
-        return DecemberEventBadge.NO_BADGE.name();
+        return DecemberEventBadge.NO_BADGE;
     }
 }
