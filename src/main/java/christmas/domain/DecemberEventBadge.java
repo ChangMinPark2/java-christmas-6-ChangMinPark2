@@ -11,4 +11,8 @@ public enum DecemberEventBadge {
     DecemberEventBadge(String badgeName) {
         this.badgeName = badgeName;
     }
+
+    public String getBadgeName() {
+        return badgeName;
+    }
 }
