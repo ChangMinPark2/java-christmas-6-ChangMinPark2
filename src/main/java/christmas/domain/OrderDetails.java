@@ -28,4 +28,31 @@ public class OrderDetails {
         this.decemberEventBadge = decemberEventBadge;
     }
 
+    public HashMap<Menu, Integer> getOrderedMenus() {
+        return orderedMenus;
+    }
+
+    public int getTotalOrderAmountBeforeDiscount() {
+        return totalOrderAmountBeforeDiscount;
+    }
+
+    public boolean isGiftMenuIncluded() {
+        return isGiftMenuIncluded;
+    }
+
+    public HashMap<String, Integer> getBenefitsReceived() {
+        return benefitsReceived;
+    }
+
+    public int getTotalBenefitValue() {
+        return totalBenefitValue;
+    }
+
+    public int getEstimatedPaymentAfterDiscount() {
+        return estimatedPaymentAfterDiscount;
+    }
+
+    public String getDecemberEventBadge() {
+        return decemberEventBadge;
+    }
 }
