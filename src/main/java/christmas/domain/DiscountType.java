@@ -10,11 +10,13 @@ public enum DiscountType {
     SPECIAL(1000, "특별 할인"),
     PRESENTATION(25000, "증정 이벤트");
 
-    public static final List<Integer> starCondition = Arrays.asList(3, 10, 17, 24, 25, 31);
-    public static final List<Integer> weekendCondition = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
-    public static final List<Integer> weekdayCondition =
+    public static final List<Integer> STAR_CONDITION = Arrays.asList(3, 10, 17, 24, 25, 31);
+    public static final List<Integer> WEEKEND_CONDITION= Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
+    public static final List<Integer> WEEKDAY_CONDITION =
             Arrays.asList(3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 31);
     public static final int CHRISTMAS_CONDITION = 25;
+    public static final int ALL_DISCOUNT_CONDITION = 10000;
+    public static final int GIFT_EVENT_CONDITION = 120000;
 
     private final int discountPrice;
     private final String discountName;
