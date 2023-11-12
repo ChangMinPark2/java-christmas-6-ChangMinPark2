@@ -6,7 +6,7 @@ public enum DecemberEventBadge {
     TREE("트리"),
     NO_BADGE("없음");
 
-    private String badgeName;
+    private final String badgeName;
 
     DecemberEventBadge(String badgeName) {
         this.badgeName = badgeName;
