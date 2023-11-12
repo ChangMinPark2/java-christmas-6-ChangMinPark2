@@ -1,27 +1,25 @@
 package christmas.domain;
 
-import christmas.view.InputView;
-
 import java.util.HashMap;
 
 public class OrderDetailsGenerator {
+    public OrderDetailsGenerator() {
+    }
 
     public OrderDetails generateOrderDetails(Order order) {
-        order = new Order(InputView.getExpectedVisitDate(), InputView.getOrderDetails());
-
-        HashMap<Menu, Integer> orderMenus = orderMenu(order);
-        int beforeDistCountAmount = beforDiscountAmount(orderMenus);
-        boolean giftMenu = isPresent(beforDiscountAmount(orderMenus));
-        HashMap<String, Integer> benefitList = benefitList(order, beforDiscountAmount(orderMenus));
-        int totalBenefitAmount = totalBenefitAmount(benefitList);
-        int afterAbleAmount = beforeDistCountAmount - totalBenefitAmount;
-        String event = totalBenefitEvent(totalBenefitAmount);
+        HashMap<Menu, Integer> orderMenus = getOrderedMenu(order);
+        int beforeDistCountAmount = calculateTotalBeforeDiscount(orderMenus);
+        boolean giftMenu = isGiftMenu(calculateTotalBeforeDiscount(orderMenus));
+        HashMap<String, Integer> benefitList = calculateBenefits(order, calculateTotalBeforeDiscount(orderMenus));
+        int totalBenefitAmount = calculateTotalBenefitAmount(benefitList);
+        int afterAbleAmount = calculateFinalPayment(beforeDistCountAmount, totalBenefitAmount, giftMenu);
+        String event = determineEventBadge(totalBenefitAmount);
         OrderDetails orderDetails = new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu, benefitList, totalBenefitAmount, afterAbleAmount, event);
 
         return orderDetails;
     }
 
-    private HashMap<Menu, Integer> orderMenu(Order order) {
+    private HashMap<Menu, Integer> getOrderedMenu(Order order) {
         HashMap<Menu, Integer> orderMenu = new HashMap<>();
 
         for (Menu menu : order.getOrderMenu().keySet()) {
@@ -32,7 +30,7 @@ public class OrderDetailsGenerator {
         return orderMenu;
     }
 
-    private int beforDiscountAmount(HashMap<Menu, Integer> orderMenus) {
+    private int calculateTotalBeforeDiscount(HashMap<Menu, Integer> orderMenus) {
         int beforeDistCountAmount = 0;
 
         for (Menu menu : orderMenus.keySet()) {
@@ -43,7 +41,7 @@ public class OrderDetailsGenerator {
         return beforeDistCountAmount;
     }
 
-    private boolean isPresent(int beforeDiscountAmount) {
+    private boolean isGiftMenu(int beforeDiscountAmount) {
         if (beforeDiscountAmount >= DiscountCalCulator.BENEFITCONDITION) {
             return true;
         }
@@ -51,14 +49,14 @@ public class OrderDetailsGenerator {
         return false;
     }
 
-    private HashMap<String, Integer> benefitList(Order order, int beforeDistCountAmount) {
+    private HashMap<String, Integer> calculateBenefits(Order order, int beforeDistCountAmount) {
         DiscountCalCulator discountCalCulator = new DiscountCalCulator();
         HashMap<String, Integer> benefitList = discountCalCulator.totalDiscount(order.getVisitDay(), beforeDistCountAmount, order);
 
         return benefitList;
     }
 
-    private int totalBenefitAmount(HashMap<String, Integer> benefitList) {
+    private int calculateTotalBenefitAmount(HashMap<String, Integer> benefitList) {
         int totalBenefitAmount = 0;
 
         for (String key : benefitList.keySet()) {
@@ -68,14 +66,25 @@ public class OrderDetailsGenerator {
         return totalBenefitAmount;
     }
 
-    private String totalBenefitEvent(int totalBenefitAmount) {
+    private int calculateFinalPayment(int beforeDistCountAmount, int totalBenefitAmount, boolean giftMenu) {
+        if (giftMenu) {
+            return beforeDistCountAmount - totalBenefitAmount + Menu.CHAMPAGNE.getPrice();
+        }
 
-        if (totalBenefitAmount >= 10000) {
-            return "트리";
+        return beforeDistCountAmount - totalBenefitAmount;
+    }
+
+    private String determineEventBadge(int totalBenefitAmount) {
+        if (totalBenefitAmount >= 5000 && totalBenefitAmount < 10000) {
+            return DecemberEventBadge.STAR.name();
+        }
+        if (totalBenefitAmount >= 10000 && totalBenefitAmount < 20000) {
+            return DecemberEventBadge.TREE.name();
         }
         if (totalBenefitAmount >= 20000) {
-            return "산타";
+            return DecemberEventBadge.SANTA.name();
         }
-        return "없음";
+
+        return DecemberEventBadge.NO_BADGE.name();
     }
 }
