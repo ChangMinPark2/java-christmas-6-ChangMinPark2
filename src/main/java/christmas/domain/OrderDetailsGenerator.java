@@ -2,6 +2,8 @@ package christmas.domain;
 
 import java.util.HashMap;
 
+import static christmas.domain.DecemberEventBadge.*;
+
 public class OrderDetailsGenerator {
     public OrderDetailsGenerator() {
     }
@@ -14,9 +16,9 @@ public class OrderDetailsGenerator {
         int totalBenefitAmount = calculateTotalBenefitAmount(benefitList);
         int afterAbleAmount = calculateFinalPayment(beforeDistCountAmount, totalBenefitAmount, giftMenu);
         DecemberEventBadge event = determineEventBadge(totalBenefitAmount);
-        OrderDetails orderDetails = new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu, benefitList, totalBenefitAmount, afterAbleAmount, event);
 
-        return orderDetails;
+        return new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu,
+                benefitList, totalBenefitAmount, afterAbleAmount, event);
     }
 
     private HashMap<Menu, Integer> getOrderedMenu(Order order) {
@@ -42,18 +44,12 @@ public class OrderDetailsGenerator {
     }
 
     private boolean isGiftMenu(int beforeDiscountAmount) {
-        if (beforeDiscountAmount >= DiscountType.GIFT_EVENT_CONDITION) {
-            return true;
-        }
-
-        return false;
+        return beforeDiscountAmount >= DiscountType.GIFT_EVENT_CONDITION;
     }
 
     private HashMap<String, Integer> calculateBenefits(Order order, int beforeDistCountAmount) {
-        DiscountCalCulator discountCalCulator = new DiscountCalCulator();
-        HashMap<String, Integer> benefitList = discountCalCulator.calculateTotalDiscount(order.getVisitDay(), beforeDistCountAmount, order);
-
-        return benefitList;
+        DiscountCalculator discountCalCulator = new DiscountCalculator();
+        return discountCalCulator.calculateTotalDiscount(order.getVisitDay(), beforeDistCountAmount, order);
     }
 
     private int calculateTotalBenefitAmount(HashMap<String, Integer> benefitList) {
@@ -75,16 +71,28 @@ public class OrderDetailsGenerator {
     }
 
     private DecemberEventBadge determineEventBadge(int totalBenefitAmount) {
-        if (totalBenefitAmount >= 5000 && totalBenefitAmount < 10000) {
-            return DecemberEventBadge.STAR;
+        if (isSanta(totalBenefitAmount)) {
+            return DecemberEventBadge.SANTA;
         }
-        if (totalBenefitAmount >= 10000 && totalBenefitAmount < 20000) {
+        if (isTree(totalBenefitAmount)) {
             return DecemberEventBadge.TREE;
         }
-        if (totalBenefitAmount >= 20000) {
-            return DecemberEventBadge.SANTA;
+        if (isStar(totalBenefitAmount)) {
+            return DecemberEventBadge.STAR;
         }
 
         return DecemberEventBadge.NO_BADGE;
+    }
+
+    private boolean isStar(int totalBenefitAmount) {
+        return totalBenefitAmount >= STAR_MIN_AMOUNT;
+    }
+
+    private boolean isTree(int totalBenefitAmount) {
+        return totalBenefitAmount >= TREE_MIN_AMOUNT;
+    }
+
+    private boolean isSanta(int totalBenefitAmount) {
+        return totalBenefitAmount >= SANTA_MIN_AMOUNT;
     }
 }
