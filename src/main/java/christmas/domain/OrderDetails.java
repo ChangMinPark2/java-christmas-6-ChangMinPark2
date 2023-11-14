@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class OrderDetails {
     private final HashMap<Menu, Integer> orderedMenus;
-    private final int totalOrderAmountBeforeDiscount; //할인 전 총 주문 금액
+    private final int totalOrderAmountBeforeDiscount;
     private final boolean isGiftMenuIncluded;
     private final HashMap<String, Integer> benefitsReceived;
     private final int totalBenefitValue;

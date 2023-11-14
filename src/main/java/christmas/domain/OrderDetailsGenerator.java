@@ -17,8 +17,8 @@ public class OrderDetailsGenerator {
         int afterAbleAmount = calculateFinalPayment(beforeDistCountAmount, totalBenefitAmount, giftMenu);
         DecemberEventBadge event = determineEventBadge(totalBenefitAmount);
 
-        return new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu,
-                benefitList, totalBenefitAmount, afterAbleAmount, event);
+        return new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu, benefitList, totalBenefitAmount,
+                afterAbleAmount, event);
     }
 
     private HashMap<Menu, Integer> getOrderedMenu(Order order) {
