@@ -4,13 +4,13 @@ import christmas.domain.Order;
 import christmas.domain.OrderDetails;
 import christmas.domain.OrderDetailsGenerator;
 import christmas.view.InputView;
-import christmas.view.OutputView;
+import christmas.view.OutPutView;
 
 import static christmas.util.Validator.*;
 
 public class ChristmasPromotionController {
     public void start() {
-        System.out.println(OutputView.GAME_GUID);
+        System.out.println(OutPutView.GAME_GUID);
 
         String visitDay = inputVisitDay();
         String orderInput = inputMenuAndCount();
@@ -22,14 +22,14 @@ public class ChristmasPromotionController {
     }
 
     private void orderList(String visitDay, OrderDetails orderDetails) {
-        OutputView.printEventPreview(visitDay);
-        OutputView.printOrderedMenuList(orderDetails);
-        OutputView.printTotalOrderAmountBeforeDiscount(orderDetails);
-        OutputView.printGiftMenu(orderDetails);
-        OutputView.printBenefitList(orderDetails);
-        OutputView.printTotalBenefitAmount(orderDetails);
-        OutputView.printEstimatedPaymentAfterDiscount(orderDetails);
-        OutputView.printDecemberEventBadge(orderDetails);
+        OutPutView.printEventPreview(visitDay);
+        OutPutView.printOrderedMenuList(orderDetails);
+        OutPutView.printTotalOrderAmountBeforeDiscount(orderDetails);
+        OutPutView.printGiftMenu(orderDetails);
+        OutPutView.printBenefitList(orderDetails);
+        OutPutView.printTotalBenefitAmount(orderDetails);
+        OutPutView.printEstimatedPaymentAfterDiscount(orderDetails);
+        OutPutView.printDecemberEventBadge(orderDetails);
     }
 
     private String inputVisitDay() {
