@@ -7,10 +7,10 @@ import java.text.NumberFormat;
 
 import static christmas.util.GlobalConstant.MINUS;
 
-public final class OutPutView {
+public final class OutputView {
     public static final String GAME_GUID = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
 
-    private OutPutView() {
+    private OutputView() {
     }
 
     public static void printEventPreview(String visitDay) {
