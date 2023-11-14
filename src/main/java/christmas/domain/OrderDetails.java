@@ -3,22 +3,23 @@ package christmas.domain;
 import java.util.HashMap;
 
 public class OrderDetails {
-    private HashMap<Menu, Integer> orderedMenus;
-    private int totalOrderAmountBeforeDiscount; //할인 전 총 주문 금액
-    private boolean isGiftMenuIncluded;
-    private HashMap<String, Integer> benefitsReceived;
-    private int totalBenefitValue;
-    private int estimatedPaymentAfterDiscount;
-    private DecemberEventBadge decemberEventBadge;
+    private final HashMap<Menu, Integer> orderedMenus;
+    private final int totalOrderAmountBeforeDiscount; //할인 전 총 주문 금액
+    private final boolean isGiftMenuIncluded;
+    private final HashMap<String, Integer> benefitsReceived;
+    private final int totalBenefitValue;
+    private final int estimatedPaymentAfterDiscount;
+    private final DecemberEventBadge decemberEventBadge;
 
-    public OrderDetails(HashMap<Menu, Integer> orderedMenus,
-                        int totalOrderAmountBeforeDiscount,
-                        boolean isGiftMenuIncluded,
-                        HashMap<String, Integer> benefitsReceived,
-                        int totalBenefitValue,
-                        int estimatedPaymentAfterDiscount,
-                        DecemberEventBadge decemberEventBadge) {
-
+    public OrderDetails(
+            HashMap<Menu, Integer> orderedMenus,
+            int totalOrderAmountBeforeDiscount,
+            boolean isGiftMenuIncluded,
+            HashMap<String, Integer> benefitsReceived,
+            int totalBenefitValue,
+            int estimatedPaymentAfterDiscount,
+            DecemberEventBadge decemberEventBadge
+    ) {
         this.orderedMenus = orderedMenus;
         this.totalOrderAmountBeforeDiscount = totalOrderAmountBeforeDiscount;
         this.isGiftMenuIncluded = isGiftMenuIncluded;
