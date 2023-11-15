@@ -10,14 +10,14 @@ public class OrderDetailsGenerator {
 
     public OrderDetails generateOrderDetails(Order order) {
         HashMap<Menu, Integer> orderMenus = getOrderedMenu(order);
-        int beforeDistCountAmount = calculateTotalBeforeDiscount(orderMenus);
+        int beforeDiscountAmount = calculateTotalBeforeDiscount(orderMenus);
         boolean giftMenu = isGiftMenu(calculateTotalBeforeDiscount(orderMenus));
         HashMap<String, Integer> benefitList = calculateBenefits(order, calculateTotalBeforeDiscount(orderMenus));
         int totalBenefitAmount = calculateTotalBenefitAmount(benefitList);
-        int afterAbleAmount = calculateFinalPayment(beforeDistCountAmount, totalBenefitAmount, giftMenu);
+        int afterAbleAmount = calculateFinalPayment(beforeDiscountAmount, totalBenefitAmount, giftMenu);
         DecemberEventBadge event = determineEventBadge(totalBenefitAmount);
 
-        return new OrderDetails(orderMenus, beforeDistCountAmount, giftMenu, benefitList, totalBenefitAmount,
+        return new OrderDetails(orderMenus, beforeDiscountAmount, giftMenu, benefitList, totalBenefitAmount,
                 afterAbleAmount, event);
     }
 
